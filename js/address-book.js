@@ -34,3 +34,28 @@ function sortObjArray(objArray, propName) {
     });
 } //sortObjArray()
 
+function render(entries){
+    var $template = $('.template');
+    var $address = $('.address-book');
+
+    $address.empty();
+
+    $.each(entries, function(index, value){
+        var $clone = $template.clone();
+        $clone.find('.first').html(value.first);
+        $clone.find('.last').html(value.last);
+        $clone.find('.title').html(value.title);
+        $clone.find('.dept').html(value.dept);
+        $clone.find('.pic').attr({
+            src: this.pic,
+            alt: 'Picture of ' + this.first 
+        });
+        
+        $clone.removeClass('template');
+        $address.append($clone);
+    });
+}
+
+$(document).ready(function() {
+    render(Employees.entries);
+});
