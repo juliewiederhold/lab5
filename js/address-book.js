@@ -57,5 +57,13 @@ function render(entries){
 }
 
 $(document).ready(function() {
+    sortObjArray(Employees.entries, 'last');
+    render(Employees.entries);
+});
+
+$('.sort-ui').click(function(){
+    var sortBtn = $(this);
+    sortBtn.attr('data-sortby');
+    sortObjArray(Employees.entries, sortBtn);
     render(Employees.entries);
 });
