@@ -56,14 +56,21 @@ function render(entries){
     });
 }
 
-$(document).ready(function() {
-    sortObjArray(Employees.entries, 'last');
-    render(Employees.entries);
+$(function() {
+    var entries = Employees.entries
+    sortObjArray(entries, 'last');
+    render(entries);
+
+    $('.sort-ui .btn').click(function(){
+        var sortBtn = $(this);
+        var sortAttr = sortBtn.attr('data-sortby');
+        sortObjArray(entries, sortAttr);
+        render(entries);
+        $.each(sortBtn.siblings(), function(){
+            var sibling = $(this);
+            sibling.removeClass('active');
+        });
+    });
 });
 
-$('.sort-ui').click(function(){
-    var sortBtn = $(this);
-    sortBtn.attr('data-sortby');
-    sortObjArray(Employees.entries, sortBtn);
-    render(Employees.entries);
-});
+
